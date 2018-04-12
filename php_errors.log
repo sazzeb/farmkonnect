@@ -1,0 +1,17 @@
+[29-Mar-2018 17:38:17 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/symfony/var-dumper/Resources/functions/dump.php on line 18
+[29-Mar-2018 17:38:17 UTC] PHP Stack trace:
+[29-Mar-2018 17:38:17 UTC] PHP   1. {main}() /home/ubuntu/workspace/public/index.php:0
+[29-Mar-2018 17:38:17 UTC] PHP   2. require() /home/ubuntu/workspace/public/index.php:24
+[29-Mar-2018 17:38:17 UTC] PHP   3. ComposerAutoloaderInitc35a9cd9f89f1b35704e7ab165cc4fd0::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[29-Mar-2018 17:38:17 UTC] PHP   4. composerRequirec35a9cd9f89f1b35704e7ab165cc4fd0() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[29-Mar-2018 17:40:41 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/symfony/var-dumper/Resources/functions/dump.php on line 18
+[29-Mar-2018 17:40:41 UTC] PHP Stack trace:
+[29-Mar-2018 17:40:41 UTC] PHP   1. {main}() /home/ubuntu/workspace/public/index.php:0
+[29-Mar-2018 17:40:41 UTC] PHP   2. require() /home/ubuntu/workspace/public/index.php:24
+[29-Mar-2018 17:40:41 UTC] PHP   3. ComposerAutoloaderInitc35a9cd9f89f1b35704e7ab165cc4fd0::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[29-Mar-2018 17:40:41 UTC] PHP   4. composerRequirec35a9cd9f89f1b35704e7ab165cc4fd0() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[01-Apr-2018 14:44:20 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Users\AccountsController::profile() in /home/ubuntu/workspace/app/Http/Controllers/Users/AccountsController.php on line 44
+[05-Apr-2018 07:52:54 UTC] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home/ubuntu/workspace/app/Http/Controllers/Users/AccountsController.php on line 5
+[07-Apr-2018 12:56:21 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Admin\AdminController::support_admin() in /home/ubuntu/workspace/app/Http/Controllers/Admin/AdminController.php on line 52
+[10-Apr-2018 18:36:45 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\Users\RegistersUsers' not found in /home/ubuntu/workspace/app/Http/Controllers/Users/RegistrationController.php on line 10
+[10-Apr-2018 18:37:49 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\Users\RegistersUsers' not found in /home/ubuntu/workspace/app/Http/Controllers/Users/RegistrationController.php on line 10
