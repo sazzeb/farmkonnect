@@ -7,7 +7,7 @@ use Storage;
 
 class Profile extends Model
 {
-    protected $fillable = [ 'location', 'phone_num', 'occupation', 'avatar', 'user_id','wallet_ballance'];
+    protected $fillable = [ 'location', 'phone_num', 'occupation', 'avatar', 'user_id','wallet_balance'];
 
     public function user()
     {

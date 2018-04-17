@@ -4,7 +4,7 @@
 
      <body class="account-pages">
 <!-- Begin page -->
-<div class="accountbg" style="background: url('assets/images/bg-2.jpg');background-size: cover;"></div>
+<div class="accountbg" style="background: url('/assets/images/bg-2.jpg');background-size: cover;"></div>
 
 <div class="wrapper-page account-page-full">
 
@@ -16,11 +16,11 @@
                 <div class="card-box p-5">
                     <h2 class="text-uppercase text-center pb-4">
                         <a href="index.html" class="text-success">
-                            <span><img src="assets/images/logo.png" alt="" height="26"></span>
+                            <span><img src="{{asset('assets/images/logo.png')}}" alt="" height="26"></span>
                         </a>
                     </h2>
 
-                    <form class="form-horizontal" method="POST" action="{{ route('registerRef/'.$referrer->referral_code) }}" >
+                    <form class="form-horizontal" method="POST" action="{{ route('registerRef',$referrer->referral_code) }}" >
                         {{ csrf_field() }}
 
                         
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         
-                        <div class="form-group row {{ $errors->has('username') ? ' has-error' : '' }}">
+                        <div class="form-group row {{ $errors->has('email') ? ' has-error' : '' }}">
                             <div class="col-12">
                                 <div class="input-group">
                                     <div class="input-group-prepend">

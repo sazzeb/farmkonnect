@@ -233,7 +233,7 @@
                     <h4 class="text-success text-center"><a href="/profile">{{ Auth::user()->name }}</a></h4>
                     <p><strong>Referral Link: </strong></p>
                       <div class="input-group">
-                        <input type="text" class="form-control" value="farmkonnect.com/{{ Auth::user()->name }}/{{ Auth::user()->referral_code }}">
+                        <input type="text" class="form-control" value="/register/{{ Auth::user()->referral_code }}" disabled=''>
                         <div class="input-group-append">
                             <button class="btn btn-outline-success waves-effect waves-light"  data-toogle="tooltip" title="Copy"><span class="fa fa-copy"></span></button>
                         </div>

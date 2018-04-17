@@ -18,7 +18,7 @@ class CreateProfilesTable extends Migration
             $table->string('user_id');
             $table->string('phone_num')->nullable();
             $table->string('occupation')->nullable();
-            $table->string('wallet_ballance')->nullable();
+            $table->string('wallet_balance')->nullable();
             $table->string('location')->nullable();
             $table->string('avatar');
             $table->timestamps();

@@ -9,11 +9,13 @@ use App\Profile;
 use App\ReferralList;
 use Keygen;
 use App\Nok;
+use Session;
 use App\Mail\VerifyMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -45,41 +47,28 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'referrer_email' => 'nullable|string'
+            'referrer_email' => 'nullable|email|exists:users|string'
         ]);
     }
 
 
     protected function create(array $data)
     {
-        
         $avatar = 'public/avatar/avatar.png';
         
-        $referrer = User::whereEmail($data['referrer_email'])->first();
-        
-        
-        if ($referrer) 
-            $ref_code = $referrer->referral_code;
-        else 
-            $ref_code = null;
+        if($data['referrer_email'] != ''){
             
+            $referrer = User::whereReferrerEmail($data['referrer_email'])->first();
+            $ref_code = $referrer->referral_code;
+            
+        }else{
+            $ref_code = null;
+        }
         $referral_code = Keygen::alphanum(17)->generate();
         
-        while (User::whereId($referral_code)->count() > 0) {
+        while (User::whereReferralCode($referral_code)->count() > 0) {
             $referral_code = Keygen::alphanum(17)->generate();
         }
-        
-        //TODO please back here and complete this stuff
-        
-        $ref_id = $referrer->id;
-        
-        $refers_code = $referrer->referrer_email;
-        
-        if($refers_code)
-            $sec_referrer = User::whereEmail($refers_code)->first();
-        else
-            $sec_referrer = null;
-        
         
         $user = User::create([
             'name' => $data['name'],
@@ -94,42 +83,15 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'token' => str_random(40)
         ]);
+        
+        
  
         Mail::to($user->email)->send(new VerifyMail($user));
         Profile::create(['user_id' => $user->id,
+                        'wallet_balance' => 0.00,
                         'avatar' => $avatar]);
         Nok::create(['user_id' => $user->id,
-                        'avatar' => $avatar]);;
-                        
-        if($data['referrer_email'] != '')
-        {
-            ReferralList::create([
-                'depositors_id' => $user->id,
-                'ref_id' => $ref_id,
-                'referrer_email' => $data['referrer_email'],
-                'referrer_code' => $referral_code,
-                'referrer_generation' => 1,
-                
-                ]);
-        }
-        
-        $sec_ref_code = $sec_referrer->referral_code;
-        
-        $sec_ref_email = $sec_referrer->referrer_email;
-        
-        $sec_ref_id = $sec_referrer->id;
-        
-        if($sec_ref_email != '')
-        {
-            ReferralList::create([
-                'depositors_id' => $user->id,
-                'ref_id' => $sec_ref_id,
-                'referrer_email' => $sec_ref_email,
-                'referrer_code' => $sec_ref_code,
-                'referrer_generation' => 2,
-                
-                ]);
-        }
+                        'avatar' => $avatar]);
  
         return $user;
     }
@@ -161,4 +123,7 @@ class RegisterController extends Controller
         $this->guard()->logout();
         return redirect('/login')->with('warning', 'We sent you an activation code. Check your email and click on the link to verify.');
     }
+    
+    
+    
 }

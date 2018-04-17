@@ -31,6 +31,11 @@
                                         {{ session('warning') }}
                                     </div>
                                 @endif
+                                @if (session('danger'))
+                                    <div class="alert alert-danger">
+                                        {{ session('danger') }}
+                                    </div>
+                                @endif
                             @csrf
 
                                 <div class="form-group m-b-20 row">
@@ -66,7 +71,7 @@
                                     <div class="col-12">
 
                                         <div class="checkbox checkbox-custom">
-                                            <input id="remember" type="checkbox" checked="">
+                                            <input id="remember" type="checkbox" >
                                             <label for="remember">
                                                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
                                             </label>
