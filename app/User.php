@@ -43,5 +43,4 @@ class User extends Authenticatable
     public function referral_list(){
         return $this ->hasMany('App\ReferralList');
     }
-    
 }

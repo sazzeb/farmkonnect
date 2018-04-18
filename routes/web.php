@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/fund', 'Users\AccountsController@fund_wallet')->name('fund_wallet');
     Route::get('/withdrawal', 'Users\AccountsController@withdrawal')->name('withdrawal');
     Route::get('/referrals', 'Users\AccountsController@referrals')->name('referrals');
-    Route::get('/investment', 'Users\AccountsController@investment')->name('investment');
+    Route::get('/investment', 'Users\InvestmentController@investment')->name('investment');
     Route::get('/support', 'Users\AccountsController@support')->name('support');
     Route::get('/profile', 'Users\AccountsController@profile')->name('profile');
     Route::get('/settings', 'Users\AccountsController@settings')->name('settings');
@@ -31,8 +31,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('/fund', 'Users\AccountsController@fund_bank_data')->name('fund_bank_data');
     Route::post('/withdrawal','Users\AccountsController@make_withdrawal')->name('make_withdrawal');
     Route::post('/profile/update/profile', 'Users\AccountsController@updateuser')->name('updateuser');
-    Route::post('/profile/update/nextofkind', 'Users\AccountsController@nextup')->name('nextup');
-    Route::post('/user/invest/fund','Users\AccountsController@investfund')->name('investfund');
+    Route::post('/profile/update/nextofkind', 'Users\InvestmentController@nextup')->name('nextup');
+    Route::post('/user/invest/fund','Users\InvestmentController@investfund')->name('investfund');
 });
 
 

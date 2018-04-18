@@ -8,6 +8,7 @@ use App\Nok;
 use App\User;
 use App\Profile;
 use App\VerifyUser;
+use App\Investment;
 use App\ReferralList;
 use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
@@ -95,8 +96,7 @@ class RegistrationController extends Controller
                             'wallet_balance' => 0.00,
                             'avatar' => $avatar]);
             Nok::create(['user_id' => $user->id,
-                            'avatar' => $avatar]);;
-                            
+                            'avatar' => $avatar]);
             
             if(Mail::to($user->email)->send(new VerifyMail($user)) === TRUE)
             {

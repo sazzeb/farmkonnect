@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Users;
+
+
 use Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Session;
+use App\User;
+use DateTime;
 use App\W_fund;
 use App\withdrawal;
-use App\User;
-use Session;
-use DateTime;
-use App\Inverstment;
+use App\Investment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 class AccountsController extends Controller
 {
     public function dashboard()
@@ -147,33 +149,7 @@ class AccountsController extends Controller
 
         return redirect()->back();
     }
-    
-    public function nextup(Request $request)
-    {
-        $this->validate($request, [
-            'location' => 'required|max:255',
-            'phone_num' => 'required|numeric',
-            'name' => 'required|string|max:255'
-        ]);
-        
-        Auth::user()->nok()->update([
-            'name' => $request->name,
-            'location' => $request->location,
-            'phone_num' => $request->phone_num
-        ]);
-        
-        
 
-        if($request->hasFile('avatar')){
-            Auth::user()->nextofkind()->update([
-                'avatar' => $request->avatar->store('public/avatars')
-            ]);
-        }
-
-        Session::flash('success', 'profile updated');
-
-        return redirect()->back();
-    }
     
     public function logout()
     {
@@ -181,50 +157,5 @@ class AccountsController extends Controller
         return redirect('/login');
     }
     
-    public function investfund(Request $request)
-    {
-        $this->validate($request, [
-            'amount' => 'required|numeric',
-            'packages' => 'required'
-        ]);
-        
-        $i = 0;
-        $count = 0;
-        
-        $packages = config('farmkonnect.packages');
-        foreach($packages as $key => $package) {
-            if($request->packages === $key && $request->amount >= $package) {
-                $count = ++$i;
-                break;
-            }
-            $i++;
-        }
-        
-        if ($package === 0)
-        {
-            Session::flash('danger', 'The least amount to be deposited at that package is '. $package);
-            return view('Users.investment');
-        }
-        $created_date = new DateTime();
-        $user_id = Auth::user()->id;
-        
-        $status = 0;
-        
-        $referer_bonus = 10000;
-        $profit = ($request->amount*48)/100;
-        
-        
-        
-        Inverstment::create([
-            'user_id' => $user_id,
-            'amount' => $request->amount,
-            'packages' => $count,
-            'profit' => $profit,
-            'status' => $status,
-            'referer_bonus' => $referer_bonus,
-            'created_date' => $created_date
-            ]);
-        Session::flash('success', 'Congratulation your invested has been made');
-        return redirect()->back();
-    }
+    
 }
