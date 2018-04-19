@@ -161,4 +161,7 @@ class InvestmentController extends Controller
         Session::flash('success', 'Congratulation your invested has been made');
         return redirect()->back();
     }
+    
+    
+    
 }
